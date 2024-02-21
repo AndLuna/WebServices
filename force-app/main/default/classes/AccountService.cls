@@ -24,6 +24,20 @@ global class AccountService {
         Map<Id, Account> accountMap = new Map<Id, Account>(accountsToInsert);
         return new List<Id>(accountMap.keySet());
     }
+        /*
+    {
+    "accounts": [
+        {
+            "Name": "Conta 1",
+            "Phone": "123-456-7890"
+        },
+        {
+            "Name": "Conta 2",
+            "Phone": "987-654-3210"
+        }
+    ]
+}
+    */
 
     
     @HttpPut
