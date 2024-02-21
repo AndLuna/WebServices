@@ -59,4 +59,44 @@ global class AccountService {
 }
     */
     
+
+    @HttpPatch
+    global static List<Id> updateAccounts(List<AccountWrapper> accountWrappers) {
+        List<Account> accountsToUpdate = new List<Account>();
+
+        for (AccountWrapper accWrapper : accountWrappers) {
+            Account acc = new Account(
+                Id = accWrapper.Id,
+                Name = accWrapper.Name,
+                Industry = accWrapper.Industry,
+                Phone = accWrapper.Phone,
+                Description = accWrapper.Description
+            );
+            accountsToUpdate.add(acc);
+        }
+
+        update accountsToUpdate;
+
+        return new List<Id>();
+    }
+
+    /*{
+    "accountWrappers": [
+        {
+            "Id": "001Dn0000138n36IAA",
+            "Name": "Novo Nome da Conta 1",
+            "Industry": "Nova Indústria 1",
+            "Phone": "999-888-7777",
+            "Description": "Nova Descrição 1"
+        },
+        {
+            "Id": "001Dn0000138n2IIAQ",
+            "Name": "Novo Nome da Conta 2",
+            "Industry": "Nova Indústria 2",
+            "Phone": "111-222-3333",
+            "Description": "Nova Descrição 2"
+        }
+    ]
+}
+ */
 }
