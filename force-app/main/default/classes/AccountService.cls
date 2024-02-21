@@ -41,14 +41,20 @@ global class AccountService {
 
     
     @HttpPut
-    global static Id upsertAccount() {
+    global static void upsertAccount() {
         String requestBody = RestContext.request.requestBody.toString();
-        AccountWrapper accountWrapper = (AccountWrapper) JSON.deserialize(requestBody, AccountWrapper.class);
-        Account acc = accountWrapper.getAccount();
-        upsert acc;
-        
-        return acc.Id;
+        List<AccountWrapper> accountWrappers = (List<AccountWrapper>)JSON.deserialize(requestBody, List<AccountWrapper>.class);
+        List<Account> accountsToUpsert = new List<Account>();
+    
+        for (AccountWrapper accWrapper : accountWrappers) {
+            Account acc = accWrapper.getAccount();
+            accountsToUpsert.add(acc);
+        }
+    
+        upsert accountsToUpsert;
     }
+    
+    
     /* 
     {
   "Id": "001Dn0000138n2JIAQ",
