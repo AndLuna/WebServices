@@ -65,14 +65,7 @@ global class AccountService {
         List<Account> accountsToUpdate = new List<Account>();
 
         for (AccountWrapper accWrapper : accountWrappers) {
-            Account acc = new Account(
-                Id = accWrapper.Id,
-                Name = accWrapper.Name,
-                Industry = accWrapper.Industry,
-                Phone = accWrapper.Phone,
-                Description = accWrapper.Description
-            );
-            accountsToUpdate.add(acc);
+            accountsToUpdate.add(accWrapper.getAccount());
         }
 
         update accountsToUpdate;
