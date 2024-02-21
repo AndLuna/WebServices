@@ -47,8 +47,7 @@ global class AccountService {
         List<Account> accountsToUpsert = new List<Account>();
     
         for (AccountWrapper accWrapper : accountWrappers) {
-            Account acc = accWrapper.getAccount();
-            accountsToUpsert.add(acc);
+            accountsToUpsert.add(accWrapper.getAccount());
         }
     
         upsert accountsToUpsert;
