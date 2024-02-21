@@ -61,7 +61,7 @@ global class AccountService {
     
 
     @HttpPatch
-    global static List<Id> updateAccounts(List<AccountWrapper> accountWrappers) {
+    global static List<String> updateAccounts(List<AccountWrapper> accountWrappers) {
         List<Account> accountsToUpdate = new List<Account>();
 
         for (AccountWrapper accWrapper : accountWrappers) {
@@ -70,7 +70,10 @@ global class AccountService {
 
         update accountsToUpdate;
 
-        return new List<Id>();
+        List<String> response = new List<String>();
+        response.add('Contas atualizadas com sucesso!');
+
+        return response;
     }
 
     /*{
