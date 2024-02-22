@@ -32,7 +32,7 @@ public with sharing class BrasilAPIGet {
                 Map<String, Object> results = (Map<String, Object>)JSON.deserializeUntyped(textBody);
                 
                 // Atualizar os campos do novo Lead com os valores obtidos da resposta da API
-                BrasilAPICreateObject.createLead(results, lead);
+                BrasilAPIObject.updateLead(results, lead);
                 
                 // Atualizar o Lead no banco de dados Salesforce
                 update lead;
