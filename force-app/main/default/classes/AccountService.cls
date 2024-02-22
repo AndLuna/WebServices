@@ -35,6 +35,7 @@ global class AccountService {
     @HttpPut
     global static void upsertAccount() {
         String requestBody = RestContext.request.requestBody.toString();
+        /*No contexto de JSON.deserialize, o .class é usado para indicar o tipo para o qual os dados JSON devem ser desserializados. Quando você fornece List<Account>.class como argumento para JSON.deserialize, está indicando que os dados JSON devem ser desserializados em uma lista de objetos Account. */
         List<Account> accountsToUpsert = (List<Account>) JSON.deserialize(requestBody, List<Account>.class);
     
         upsert accountsToUpsert;
