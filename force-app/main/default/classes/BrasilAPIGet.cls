@@ -1,5 +1,7 @@
 /**
- * @description       : 
+ * @description       : Esse metodo nao consume a Wrapper, desserializa diretamente 
+ *                      pelo Map<String, Object> results = (Map<String, Object>)JSON.deserializeUntyped(textBody);
+
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
  * @last modified on  : 02-22-2024

@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             : 
+ * @last modified on  : 02-22-2024
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+**/
 @RestResource(urlMapping='/account/*')
 global class AccountService {
     @HttpGet
@@ -12,10 +19,10 @@ global class AccountService {
     }
     
    @HttpPost
-    global static List<Id> post(List<AccountWrapper> accounts) {
+    global static List<Id> post(List<AccountWrapper> accountWrappers) {
         List<Account> accountsToInsert = new List<Account>();
 
-        for (AccountWrapper accPayload : accounts) {
+        for (AccountWrapper accPayload : accountWrappers) {
             accountsToInsert.add(accPayload.getAccount());
         }
 
@@ -24,47 +31,15 @@ global class AccountService {
         Map<Id, Account> accountMap = new Map<Id, Account>(accountsToInsert);
         return new List<Id>(accountMap.keySet());
     }
-        /*
-    {
-    "accounts": [
-        {
-            "Name": "Conta 1",
-            "Phone": "123-456-7890"
-        },
-        {
-            "Name": "Conta 2",
-            "Phone": "987-654-3210"
-        }
-    ]
-}
-    */
 
-    
     @HttpPut
     global static void upsertAccount() {
         String requestBody = RestContext.request.requestBody.toString();
-        List<AccountWrapper> accountWrappers = (List<AccountWrapper>)JSON.deserialize(requestBody, List<AccountWrapper>.class);
-        List<Account> accountsToUpsert = new List<Account>();
-    
-        for (AccountWrapper accWrapper : accountWrappers) {
-            accountsToUpsert.add(accWrapper.getAccount());
-        }
+        List<Account> accountsToUpsert = (List<Account>) JSON.deserialize(requestBody, List<Account>.class);
     
         upsert accountsToUpsert;
     }
     
-    
-    /* 
-    {
-  "Id": "001Dn0000138n2JIAQ",
-  "Name": "sucesso",
-  "Industry": null,
-  "Phone": null,
-  "Description": null
-}
-    */
-    
-
     @HttpPatch
     global static List<String> updateAccounts(List<AccountWrapper> accountWrappers) {
         List<Account> accountsToUpdate = new List<Account>();
@@ -81,8 +56,27 @@ global class AccountService {
         return response;
     }
 
-    /*{
-    "accountWrappers": [
+    /*
+    JSON:
+    [
+    {
+       // "Id": "001Dn0000138n36IAA",
+        "Name": "za",
+        "Industry": "Nova Indústria 1",
+        "Phone": "999-888-7777",
+        "Description": "Nova Descrição 1"
+    },
+    {
+       // "Id": "001Dn0000138n2IIAQ",
+        "Name": "ze",
+        "Industry": "Nova Indústria 2",
+        "Phone": "111-222-3333",
+        "Description": "Nova Descrição 2"
+    }
+]
+
+
+  "accountWrappers": [
         {
             "Id": "001Dn0000138n36IAA",
             "Name": "Novo Nome da Conta 1",
@@ -99,5 +93,5 @@ global class AccountService {
         }
     ]
 }
- */
+    */
 }
